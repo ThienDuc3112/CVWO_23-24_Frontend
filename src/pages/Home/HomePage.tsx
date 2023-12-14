@@ -4,7 +4,7 @@ const services = ["Service 1", "Service 2", "Service 3"];
 
 const HomePage = () => {
   return (
-    <Container>
+    <Container sx={{ width: "100%" }}>
       <Typography
         variant="h1"
         sx={{
@@ -26,7 +26,7 @@ const HomePage = () => {
         }}
       >
         {services.map((str) => (
-          <Paper elevation={3} sx={{ width: { xs: 1, md: 360 } }}>
+          <Paper key={str} elevation={3} sx={{ width: 1 }}>
             <Box sx={{ m: 3 }}>
               <Typography variant="h3">{str}</Typography>
               <Typography mt={2}>
