@@ -1,17 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import "./index.css";
-import App from "./pages/App";
-import OtherPage from "./pages/otherComponent";
+import { BrowserRouter } from "react-router-dom";
+import App from "./Layout";
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 
-const router = createBrowserRouter([
-  { path: "/", Component: App },
-  { path: "/other", Component: OtherPage },
-]);
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>
 );
