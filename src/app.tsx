@@ -12,7 +12,10 @@ const DashboardPage = lazy(() => import("./pages/Dashboard/DashboardPage"));
 function App() {
   return (
     <>
-      <Container sx={{ display: "flex" }}>
+      <Container
+        style={{ maxWidth: "100%" }}
+        sx={{ display: "flex", margin: 0, width: "100%" }}
+      >
         <Sidebar />
         <Routes>
           <Route path="/" element={<HomePage />} />
