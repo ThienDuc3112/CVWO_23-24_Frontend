@@ -2,12 +2,12 @@ import { Route, Routes } from "react-router-dom";
 import { lazy } from "react";
 import Sidebar from "./components/navbar/Sidebar";
 import { Container } from "@mui/material";
-const HomePage = lazy(() => import("./pages/Home/HomePage"));
-const LoginPage = lazy(() => import("./pages/Login/LoginPage"));
-const RegisterPage = lazy(() => import("./pages/Register/RegisterPage"));
-const PostPage = lazy(() => import("./pages/Post/PostPage"));
-const CreatePostPage = lazy(() => import("./pages/CreatePost/CreatePostPage"));
-const DashboardPage = lazy(() => import("./pages/Dashboard/DashboardPage"));
+import HomePage from "./pages/Home/HomePage";
+import LoginPage from "./pages/Login/LoginPage";
+import RegisterPage from "./pages/Register/RegisterPage";
+import PostPage from "./pages/Post/PostPage";
+import CreatePostPage from "./pages/CreatePost/CreatePostPage";
+import DashboardPage from "./pages/Dashboard/DashboardPage";
 
 function App() {
   return (

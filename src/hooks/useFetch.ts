@@ -29,6 +29,6 @@ export const useFetch = <T>(
         setState({ err: error as Error });
       }
     })();
-  }, [url]);
+  }, [url, withCredential]);
   return state;
 };

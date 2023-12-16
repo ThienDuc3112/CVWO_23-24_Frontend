@@ -1,5 +1,6 @@
 import { Container, Grid, Typography } from "@mui/material";
 import PostList from "../../components/postList/PostList";
+import CategoryList from "../../components/catagoryList/CategoryList";
 
 const HomePage = () => {
   return (
@@ -15,12 +16,12 @@ const HomePage = () => {
       >
         Home
       </Typography>
-      <Grid container spacing={1} sx={{ height: "200vh" }}>
+      <Grid container spacing={3} sx={{ height: "200vh" }}>
         <Grid
           item
           xs={12}
-          md={8}
-          lg={9}
+          md={7}
+          lg={8}
           sx={{ height: "100%" }}
           order={{ xs: 2, md: 1 }}
         >
@@ -29,12 +30,12 @@ const HomePage = () => {
         <Grid
           item
           xs={12}
-          md={4}
-          lg={3}
-          sx={{ bgcolor: "blue", height: "100%" }}
+          md={5}
+          lg={4}
+          sx={{ height: "100%" }}
           order={{ xs: 1, md: 2 }}
         >
-          Catagories
+          <CategoryList />
         </Grid>
       </Grid>
     </Container>

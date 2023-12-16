@@ -4,7 +4,7 @@ export interface IPost {
   author: string;
   timestamp: number;
   upvotes: number;
-  view: number;
+  viewCount: number;
   tags: string[];
   content: string;
 }
