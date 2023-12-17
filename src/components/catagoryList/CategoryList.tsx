@@ -9,7 +9,7 @@ const CategoryList = () => {
       <Divider />
       <Stack gap={0} pt={2}>
         {CategoryTestData.map((category) => (
-          <CategoryCard {...category} />
+          <CategoryCard key={category.name} {...category} />
         ))}
       </Stack>
     </>

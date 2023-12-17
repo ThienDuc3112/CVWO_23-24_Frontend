@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { lazy } from "react";
 import Sidebar from "./components/navbar/Sidebar";
 import { Container } from "@mui/material";
 import HomePage from "./pages/Home/HomePage";

@@ -13,7 +13,7 @@ const PostList = () => {
       <Divider />
       <List>
         {TestPosts.map((post) => (
-          <ListItem>
+          <ListItem key={post.postId}>
             <PostCard {...post} />
           </ListItem>
         ))}

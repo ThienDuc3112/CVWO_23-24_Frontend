@@ -15,11 +15,11 @@ const CategoryCard = ({
       sx={{ border: 0, borderLeft: 5, borderColor: colour, pl: 1 }}
     >
       <Grid container>
-        <Grid xs={11}>
+        <Grid item xs={11}>
           <Typography variant="h5">{name}</Typography>
           <Typography variant="body1">{description}</Typography>
         </Grid>
-        <Grid xs={1} textAlign={"right"}>
+        <Grid item xs={1} textAlign={"right"}>
           <Typography variant="caption">{postCount}</Typography>
         </Grid>
       </Grid>
