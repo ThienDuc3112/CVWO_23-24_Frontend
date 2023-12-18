@@ -18,24 +18,25 @@ import {
   LocalFireDepartment,
   Campaign,
   Gavel,
-  AccessTime,
   Message,
   AddCircle,
   Person,
+  Home,
+  Group,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 250;
 const options = [
-  ["Recent", "Top post", "News", "Rules"],
+  ["Home", "Top post", "News", "Users", "Rules"],
   ["Message", "Create post", "Profile"],
 ];
 const icons = [
-  [<AccessTime />, <LocalFireDepartment />, <Campaign />, <Gavel />],
+  [<Home />, <LocalFireDepartment />, <Campaign />, <Group />, <Gavel />],
   [<Message />, <AddCircle />, <Person />],
 ];
 const paths = [
-  ["/recent", "/toppost", "/news", "/rules"],
+  ["/", "/toppost", "/news", "/users", "/rules"],
   ["/message", "/create", "/dashboard"],
 ];
 

@@ -30,6 +30,9 @@ const PostCard = ({
         p: 1,
         display: "flex",
         alignItems: "center",
+        ":hover": {
+          boxShadow: 10,
+        },
       }}
     >
       <Box>

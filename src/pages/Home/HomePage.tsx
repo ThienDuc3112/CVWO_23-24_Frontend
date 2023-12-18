@@ -1,22 +1,26 @@
 import { Container, Grid, Typography } from "@mui/material";
 import PostList from "../../components/postList/PostList";
-import CategoryList from "../../components/catagoryList/CategoryList";
+import CategoryList from "../../components/categoryList/CategoryList";
+import SearchBar from "../../components/searchBar/SearchBar";
+import Background from "../../components/background/Background";
 
 const HomePage = () => {
   return (
     <Container sx={{ width: "100%", p: 0 }}>
+      <Background />
       <Typography
         variant="h1"
         sx={{
           pt: 4,
           textAlign: "center",
-          color: "primary",
+          color: "white",
           gap: 4,
         }}
       >
         Home
       </Typography>
-      <Grid container spacing={3} sx={{ height: "200vh" }}>
+      <SearchBar />
+      <Grid container spacing={3}>
         <Grid
           item
           xs={12}
