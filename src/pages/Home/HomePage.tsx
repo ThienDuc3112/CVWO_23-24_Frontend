@@ -1,5 +1,5 @@
 import { Container, Grid, Typography } from "@mui/material";
-import PostList from "../../components/postList/PostList";
+import ThreadList from "../../components/threadList/ThreadList";
 import CategoryList from "../../components/categoryList/CategoryList";
 import SearchBar from "../../components/searchBar/SearchBar";
 import Background from "../../components/background/Background";
@@ -14,7 +14,6 @@ const HomePage = () => {
           pt: 4,
           textAlign: "center",
           color: "white",
-          gap: 4,
         }}
       >
         Home
@@ -29,7 +28,7 @@ const HomePage = () => {
           sx={{ height: "100%" }}
           order={{ xs: 2, md: 1 }}
         >
-          <PostList />
+          <ThreadList />
         </Grid>
         <Grid
           item

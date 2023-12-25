@@ -18,7 +18,6 @@ import {
   LocalFireDepartment,
   Campaign,
   Gavel,
-  Message,
   AddCircle,
   Person,
   Home,
@@ -29,15 +28,15 @@ import { Link } from "react-router-dom";
 const drawerWidth = 250;
 const options = [
   ["Home", "Top post", "News", "Users", "Rules"],
-  ["Message", "Create post", "Profile"],
+  ["Create post", "Profile"],
 ];
 const icons = [
   [<Home />, <LocalFireDepartment />, <Campaign />, <Group />, <Gavel />],
-  [<Message />, <AddCircle />, <Person />],
+  [<AddCircle />, <Person />],
 ];
 const paths = [
   ["/", "/toppost", "/news", "/users", "/rules"],
-  ["/message", "/create", "/dashboard"],
+  ["/create", "/dashboard"],
 ];
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -60,6 +59,42 @@ const closedMixin = (theme: Theme): CSSObject => ({
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
 });
+
+const OptionList = ({ num, open }: { num: number; open: boolean }) => (
+  <List>
+    {options[num].map((text, index) => (
+      <ListItem
+        key={text}
+        disablePadding
+        sx={{ display: "block", textDecoration: "none" }}
+      >
+        <Link
+          style={{ textDecoration: "inherit", color: "inherit" }}
+          to={paths[num][index]}
+        >
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? "initial" : "center",
+              px: 2.5,
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : "auto",
+                justifyContent: "center",
+              }}
+            >
+              {icons[num][index]}
+            </ListItemIcon>
+            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+          </ListItemButton>
+        </Link>
+      </ListItem>
+    ))}
+  </List>
+);
 
 const Drawer = styled(MUIDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -95,78 +130,8 @@ const Sidebar = () => {
             height: "100%",
           }}
         >
-          <List>
-            {options[0].map((text, index) => (
-              <ListItem
-                key={text}
-                disablePadding
-                sx={{ display: "block", textDecoration: "none" }}
-              >
-                <Link
-                  style={{ textDecoration: "inherit", color: "inherit" }}
-                  to={paths[0][index]}
-                >
-                  <ListItemButton
-                    sx={{
-                      minHeight: 48,
-                      justifyContent: open ? "initial" : "center",
-                      px: 2.5,
-                    }}
-                  >
-                    <ListItemIcon
-                      sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : "auto",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {icons[0][index]}
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={text}
-                      sx={{ opacity: open ? 1 : 0 }}
-                    />
-                  </ListItemButton>
-                </Link>
-              </ListItem>
-            ))}
-          </List>
-          <List>
-            {options[1].map((text, index) => (
-              <ListItem
-                key={text}
-                disablePadding
-                sx={{ display: "block", textDecoration: "none" }}
-              >
-                <Link
-                  to={paths[1][index]}
-                  style={{ textDecoration: "inherit", color: "inherit" }}
-                >
-                  <ListItemButton
-                    sx={{
-                      minHeight: 48,
-                      justifyContent: open ? "initial" : "center",
-                      px: 2.5,
-                    }}
-                  >
-                    <ListItemIcon
-                      sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : "auto",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {icons[1][index]}
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={text}
-                      sx={{ opacity: open ? 1 : 0 }}
-                    />
-                  </ListItemButton>
-                </Link>
-              </ListItem>
-            ))}
-          </List>
+          <OptionList num={0} open />
+          <OptionList num={1} open />
         </Box>
       </Drawer>
     </>

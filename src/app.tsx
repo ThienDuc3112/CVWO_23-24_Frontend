@@ -4,7 +4,7 @@ import { Container } from "@mui/material";
 import HomePage from "./pages/Home/HomePage";
 import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Register/RegisterPage";
-import PostPage from "./pages/Post/PostPage";
+import ThreadPage from "./pages/Thread/ThreadPage";
 import CreatePostPage from "./pages/CreatePost/CreatePostPage";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
 
@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/post/:postid" element={<PostPage />} />
+          <Route path="/thread/:threadid" element={<ThreadPage />} />
           <Route path="/create" element={<CreatePostPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
         </Routes>
