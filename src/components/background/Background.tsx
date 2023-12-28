@@ -4,7 +4,7 @@ const Img = styled("img")({
   width: "100%",
   position: "absolute",
   zIndex: -1,
-  height: "130px",
+  height: "155px",
   objectFit: "cover",
   objectPosition: "50% 30%",
   top: 0,

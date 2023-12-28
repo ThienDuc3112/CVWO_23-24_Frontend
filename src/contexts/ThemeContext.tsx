@@ -5,35 +5,53 @@ import {
 } from "@mui/material";
 import { createContext, ReactNode, useContext, useState } from "react";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
-const lightTheme = createTheme({
+const theme = createTheme({
   palette: {
     mode: "light",
+  },
+  typography: {
+    allVariants: {
+      fontFamily: "'Roboto Slab', serif",
+    },
+    h1: {
+      fontSize: "4rem",
+    },
+    h2: {
+      fontSize: "3.25rem",
+    },
+    h3: {
+      fontSize: "2.5rem",
+    },
+    h4: {
+      fontSize: "2rem",
+    },
+    h5: {
+      fontSize: "1.6rem",
+    },
+    h6: {
+      fontSize: "1.3rem",
+    },
   },
 });
 
 const ThemeContext = createContext({
-  theme: lightTheme,
+  theme: theme,
   themeSwitcher: () => {},
 });
 
 export const useThemeContext = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState("light" as "light" | "dark");
   return (
     <ThemeContext.Provider
       value={{
-        theme: theme == "light" ? lightTheme : darkTheme,
-        themeSwitcher: () =>
-          setTheme((prev) => (prev == "light" ? "dark" : "light")),
+        theme: theme,
+        themeSwitcher: () => {
+          theme.palette.mode = theme.palette.mode == "light" ? "dark" : "light";
+        },
       }}
     >
-      <MThemeProvider theme={theme == "light" ? lightTheme : darkTheme}>
+      <MThemeProvider theme={theme}>
         <CssBaseline />
         {children}
       </MThemeProvider>
