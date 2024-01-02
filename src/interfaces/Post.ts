@@ -1,10 +1,9 @@
 export interface IPost {
-  postId: string;
+  id: string;
+  username: string;
   title: string;
-  author: string;
-  timestamp: number;
-  upvotes: number;
-  viewCount: number;
-  tags: string[];
   content: string;
+  upvotes: number;
+  category: number;
+  created_at: string;
 }

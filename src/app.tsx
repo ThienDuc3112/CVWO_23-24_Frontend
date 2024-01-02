@@ -22,10 +22,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/thread/:threadid" element={<ThreadPage />} />
+          <Route path="/t/:threadid" element={<ThreadPage />} />
           <Route path="/create" element={<CreatePostPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="toppost" element={<TopPost />} />
+          <Route path="/toppost" element={<TopPost />} />
           <Route path="/rules" element={<Rules />} />
         </Routes>
       </Container>

@@ -20,22 +20,15 @@ const Paper = styled(MUIPaper)({
   },
 });
 
-const PostCard = ({
-  postId,
-  author,
-  timestamp,
-  title,
-  upvotes,
-  viewCount,
-}: IPost) => {
+const PostCard = ({ id, username, created_at, title, upvotes }: IPost) => {
   return (
     <Paper elevation={4}>
       <Box>
-        <VoteSidebar upvotes={upvotes} postId={postId} />
+        <VoteSidebar upvotes={upvotes} id={`${id}`} />
       </Box>
       <Box
         component={Link}
-        to={`/thread/${postId}`}
+        to={`/t/${id}`}
         sx={{ textDecoration: "none", color: "inherit" }}
         width={"100%"}
         pr={2}
@@ -50,9 +43,8 @@ const PostCard = ({
           }}
         >
           <Typography variant="subtitle2">
-            {author} - {convertTimestamp(timestamp)}
+            {username} - {convertTimestamp(created_at)}
           </Typography>
-          <Typography variant="subtitle2">{viewCount} views</Typography>
         </Container>
       </Box>
     </Paper>

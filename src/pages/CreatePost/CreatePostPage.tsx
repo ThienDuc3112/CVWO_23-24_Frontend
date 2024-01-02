@@ -1,4 +1,4 @@
-import { Container, Input, TextareaAutosize, Typography } from "@mui/material";
+import { Container, TextareaAutosize, Typography } from "@mui/material";
 import MuiMarkdown from "mui-markdown";
 import { useState } from "react";
 
