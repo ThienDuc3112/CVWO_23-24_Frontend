@@ -1,22 +1,25 @@
-// import { useParams } from "react-router-dom";
-// import { useFetch } from "../../hooks/useFetch";
+import { useParams } from "react-router-dom";
+import { useFetch } from "../../hooks/useFetch";
 import { Container, Stack, Typography } from "@mui/material";
-import { TestPosts } from "../../test/PlaceholderData";
 import Post from "../../components/post/Post";
+import { IPost } from "../../interfaces/Post";
 
 const ThreadPage = () => {
-  // const {threadid} = useParams();
-  // const {data,err} = useFetch(`${process.env.API_URL}/thread/${threadid}`)
-  // if(err) return <p>Error</p>
-  // if(!data) return <p>Loading...</p>
-  const thread = TestPosts[2];
+  const { threadid } = useParams();
+  const { data, err } = useFetch<{
+    id: number;
+    title: string;
+    posts: IPost[];
+  }>(`http://localhost:3000/thred/${threadid}`);
+  if (err) return <p>Error</p>;
+  if (!data) return <p>Loading...</p>;
   return (
     <Container sx={{ width: "80%", margin: "auto" }}>
       <Stack>
-        <Typography variant="h1">{thread.title}</Typography>
-        <Post {...thread} />
+        <Typography variant="h1">{data.title}</Typography>
+        <Post {...data.posts[0]} />
         <Typography variant="h1">Follow up</Typography>
-        {TestPosts.filter((post, index) => index != 2).map((post) => (
+        {data.posts.slice(1).map((post) => (
           <Post {...post} />
         ))}
       </Stack>

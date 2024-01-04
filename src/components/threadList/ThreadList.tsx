@@ -1,8 +1,7 @@
 import { Divider, List, ListItem, Typography } from "@mui/material";
 import { useFetch } from "../../hooks/useFetch";
-import PostCard from "./ThreadCard";
-import { TestPosts } from "../../test/PlaceholderData";
-import { IPost } from "../../interfaces/Post";
+import ThreadCard from "./ThreadCard";
+import { IPost, IThread } from "../../interfaces/Post";
 
 const ThreadList = ({
   sortByUpvote,
@@ -11,7 +10,7 @@ const ThreadList = ({
   sortByUpvote?: boolean;
   tag?: string;
 }) => {
-  const { data, err } = useFetch<IPost[]>(`http://localhost:3000/post`);
+  const { data, err } = useFetch<IThread[]>(`http://localhost:3000/thred`);
   console.log(data, err);
   if (err) return <Typography>There was an error</Typography>;
   if (!data) return <Typography>Loading...</Typography>;
@@ -22,7 +21,7 @@ const ThreadList = ({
       <List>
         {data.map((post) => (
           <ListItem key={post.id}>
-            <PostCard {...post} />
+            <ThreadCard {...post} />
           </ListItem>
         ))}
       </List>

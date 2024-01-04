@@ -5,7 +5,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { IPost } from "../../interfaces/Post";
+import { IPost, IThread } from "../../interfaces/Post";
 import { Link } from "react-router-dom";
 import VoteSidebar from "../voteSidebar/VoteSidebar";
 import { convertTimestamp } from "../../helpers/timestampToDateString";
@@ -20,7 +20,7 @@ const Paper = styled(MUIPaper)({
   },
 });
 
-const PostCard = ({ id, username, created_at, title, upvotes }: IPost) => {
+const ThreadCard = ({ id, username, created_at, title, upvotes }: IThread) => {
   return (
     <Paper elevation={4}>
       <Box>
@@ -51,4 +51,4 @@ const PostCard = ({ id, username, created_at, title, upvotes }: IPost) => {
   );
 };
 
-export default PostCard;
+export default ThreadCard;

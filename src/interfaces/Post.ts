@@ -1,9 +1,16 @@
 export interface IPost {
   id: string;
   username: string;
-  title: string;
   content: string;
   upvotes: number;
-  category: number;
   created_at: string;
+}
+
+export interface IThread {
+  id: string;
+  username: string;
+  upvotes: number;
+  category: string;
+  created_at: string;
+  title: string;
 }
