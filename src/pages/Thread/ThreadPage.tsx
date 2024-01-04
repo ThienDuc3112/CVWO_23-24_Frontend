@@ -3,6 +3,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { Container, Stack, Typography } from "@mui/material";
 import Post from "../../components/post/Post";
 import { IPost } from "../../interfaces/Post";
+import { API_URL } from "../../costants";
 
 const ThreadPage = () => {
   const { threadid } = useParams();
@@ -10,7 +11,7 @@ const ThreadPage = () => {
     id: number;
     title: string;
     posts: IPost[];
-  }>(`http://localhost:3000/thred/${threadid}`);
+  }>(`${API_URL}/thread/${threadid}`);
   if (err) return <p>Error</p>;
   if (!data) return <p>Loading...</p>;
   return (

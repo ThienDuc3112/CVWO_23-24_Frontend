@@ -9,8 +9,11 @@ import {
 } from "@mui/material";
 import { FormEvent, useState } from "react";
 import Post from "../../components/post/Post";
+import { API_URL } from "../../costants";
+import { useNavigate } from "react-router-dom";
 
 const CreatePostPage = () => {
+  const navigate = useNavigate();
   const [post, setPost] = useState("");
   const [category, setCategory] = useState("" as number | "");
   const [title, setTitle] = useState("");
@@ -18,7 +21,34 @@ const CreatePostPage = () => {
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(post, title, username, category);
-    alert("Not implemented");
+    fetch(`${API_URL}/thread`, {
+      body: JSON.stringify({
+        post: {
+          content: post,
+          category,
+          title,
+          username,
+        },
+      }),
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((thread) => {
+            console.log(thread);
+            alert("Thread posted");
+            navigate(`/t/${thread.id}`);
+          });
+        } else {
+          alert("Cannot create the thread, please check all field");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
   return (
     <Container>
@@ -59,7 +89,7 @@ const CreatePostPage = () => {
               sx={{ mb: 1 }}
               variant="filled"
             >
-              {[1, 2, 3, 4, 5, 6].map((category) => (
+              {[1].map((category) => (
                 <MenuItem key={category} value={category}>
                   Category {category}{" "}
                 </MenuItem>

@@ -21,14 +21,13 @@ import {
   AddCircle,
   Person,
   Home,
-  Group,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 250;
 const options = [
   ["Home", "Top post", "News", "Rules"],
-  ["Create post", "Profile"],
+  ["New thread", "Profile"],
 ];
 const icons = [
   [<Home />, <LocalFireDepartment />, <Campaign />, <Gavel />],

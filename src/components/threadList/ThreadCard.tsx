@@ -5,7 +5,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { IPost, IThread } from "../../interfaces/Post";
+import { IThread } from "../../interfaces/Post";
 import { Link } from "react-router-dom";
 import VoteSidebar from "../voteSidebar/VoteSidebar";
 import { convertTimestamp } from "../../helpers/timestampToDateString";

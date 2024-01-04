@@ -1,7 +1,15 @@
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import { List, ListItem, ListItemButton, Typography } from "@mui/material";
 
-const VoteSidebar = ({ upvotes, id }: { upvotes: number; id: string }) => {
+const VoteSidebar = ({
+  upvotes,
+  id,
+  preview,
+}: {
+  upvotes: number;
+  id: string;
+  preview?: boolean;
+}) => {
   return (
     <List disablePadding sx={{ marginRight: 1 }}>
       <ListItem>
