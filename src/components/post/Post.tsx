@@ -3,10 +3,15 @@ import { IPost } from "../../interfaces/Post";
 import VoteSidebar from "../voteSidebar/VoteSidebar";
 import MuiMarkdown from "mui-markdown";
 import { convertTimestamp } from "../../helpers/timestampToDateString";
-import { useThemeContext } from "../../contexts/ThemeContext";
 
-const Post = ({ upvotes, content, username, created_at, id }: IPost) => {
-  const { theme } = useThemeContext();
+const Post = ({
+  upvotes,
+  content,
+  username,
+  created_at,
+  id,
+  preview,
+}: IPost & { preview?: boolean }) => {
   return (
     <Paper elevation={3} sx={{ my: 2, p: 2 }}>
       <Stack direction={"row"}>
