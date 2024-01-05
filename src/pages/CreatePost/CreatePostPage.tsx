@@ -20,7 +20,6 @@ const CreatePostPage = () => {
   const [username, setUsername] = useState("");
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(post, title, username, category);
     fetch(`${API_URL}/thread`, {
       body: JSON.stringify({
         post: {
