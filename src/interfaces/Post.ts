@@ -1,16 +1,22 @@
 export interface IPost {
-  id: string;
-  username: string;
+  id: number;
   content: string;
+  username: string;
   upvotes: number;
+  thred_id: number;
   created_at: string;
 }
 
-export interface IThread {
-  id: string;
+export interface IThread extends IThreadPreview {
+  content: string;
+  followups: IPost[];
+}
+
+export interface IThreadPreview {
+  id: number;
+  title: string;
   username: string;
   upvotes: number;
-  category: string;
+  category_id: string;
   created_at: string;
-  title: string;
 }

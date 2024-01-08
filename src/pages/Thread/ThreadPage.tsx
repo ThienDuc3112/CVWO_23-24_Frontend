@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import Post from "../../components/post/Post";
-import { IPost } from "../../interfaces/Post";
+import { IPost, IThread } from "../../interfaces/Post";
 import { API_URL } from "../../costants";
 import { FormEventHandler, useState } from "react";
 
@@ -36,7 +36,7 @@ const ThreadPage = () => {
           res.json().then((json) => {
             console.log(json);
             alert("Response posted");
-            data?.posts.push(json);
+            data?.followups.push(json);
             setUsername("");
             setPost("");
           });
@@ -46,20 +46,23 @@ const ThreadPage = () => {
       })
       .catch((err) => console.error(err));
   };
-  const { data, err } = useFetch<{
-    id: number;
-    title: string;
-    posts: IPost[];
-  }>(`${API_URL}/thread/${threadid}`);
+  const { data, err } = useFetch<IThread>(`${API_URL}/thread/${threadid}`);
   if (err) return <p>Error</p>;
   if (!data) return <p>Loading...</p>;
   return (
     <Container sx={{ width: "80%", margin: "auto" }}>
       <Stack>
         <Typography variant="h1">{data.title}</Typography>
-        <Post {...data.posts[0]} />
+        <Post
+          content={data.content}
+          created_at={data.created_at}
+          id={-1}
+          thred_id={data.id}
+          upvotes={data.upvotes}
+          username={data.username}
+        />
         <Typography variant="h1">Follow up</Typography>
-        {data.posts.slice(1).map((post) => (
+        {data.followups.map((post) => (
           <Post {...post} key={post.id} />
         ))}
         <form onSubmit={submitHandler}>
@@ -96,10 +99,11 @@ const ThreadPage = () => {
         <Typography variant="h1">Preview</Typography>
         <Divider />
         <Post
+          thred_id={-1}
           preview={true}
           content={post}
           created_at={new Date().toISOString()}
-          id="-1"
+          id={-1}
           upvotes={0}
           username={username}
         />

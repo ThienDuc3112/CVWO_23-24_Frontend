@@ -22,7 +22,7 @@ const CreatePostPage = () => {
     e.preventDefault();
     fetch(`${API_URL}/thread`, {
       body: JSON.stringify({
-        post: {
+        thread: {
           content: post,
           category,
           title,
@@ -117,10 +117,11 @@ const CreatePostPage = () => {
         <Typography variant="h1">Preview</Typography>
         <Divider />
         <Post
+          thred_id={-1}
           preview={true}
           content={post}
           created_at={new Date().toISOString()}
-          id="-1"
+          id={-1}
           upvotes={0}
           username={username}
         />

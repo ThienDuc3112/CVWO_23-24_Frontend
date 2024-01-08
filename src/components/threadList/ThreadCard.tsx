@@ -5,7 +5,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { IThread } from "../../interfaces/Post";
+import { IThreadPreview } from "../../interfaces/Post";
 import { Link } from "react-router-dom";
 import VoteSidebar from "../voteSidebar/VoteSidebar";
 import { convertTimestamp } from "../../helpers/timestampToDateString";
@@ -20,11 +20,17 @@ const Paper = styled(MUIPaper)({
   },
 });
 
-const ThreadCard = ({ id, username, created_at, title, upvotes }: IThread) => {
+const ThreadCard = ({
+  id,
+  username,
+  created_at,
+  title,
+  upvotes,
+}: IThreadPreview) => {
   return (
     <Paper elevation={4}>
       <Box>
-        <VoteSidebar upvotes={upvotes} id={`${id}`} />
+        <VoteSidebar upvotes={upvotes} id={id} />
       </Box>
       <Box
         component={Link}

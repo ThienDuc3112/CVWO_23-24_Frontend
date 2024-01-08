@@ -1,7 +1,7 @@
 import { Divider, List, ListItem, Typography } from "@mui/material";
 import { useFetch } from "../../hooks/useFetch";
 import ThreadCard from "./ThreadCard";
-import { IThread } from "../../interfaces/Post";
+import { IThreadPreview } from "../../interfaces/Post";
 import { API_URL } from "../../costants";
 
 const ThreadList = ({
@@ -11,7 +11,7 @@ const ThreadList = ({
   sortByUpvote?: boolean;
   thread?: string;
 }) => {
-  const { data, err } = useFetch<IThread[]>(`${API_URL}/thread`);
+  const { data, err } = useFetch<IThreadPreview[]>(`${API_URL}/thread`);
   console.log(data, err);
   if (err) return <Typography>There was an error</Typography>;
   if (!data) return <Typography>Loading...</Typography>;

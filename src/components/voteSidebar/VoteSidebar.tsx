@@ -7,7 +7,7 @@ const VoteSidebar = ({
   preview,
 }: {
   upvotes: number;
-  id: string;
+  id: number;
   preview?: boolean;
 }) => {
   return (
