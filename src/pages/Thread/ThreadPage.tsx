@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import Post from "../../components/post/Post";
-import { IPost, IThread } from "../../interfaces/Post";
+import { IThread } from "../../interfaces/Post";
 import { API_URL } from "../../costants";
 import { FormEventHandler, useState } from "react";
 

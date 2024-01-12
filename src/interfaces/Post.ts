@@ -17,6 +17,6 @@ export interface IThreadPreview {
   title: string;
   username: string;
   upvotes: number;
-  category_id: string;
+  category_id: number;
   created_at: string;
 }

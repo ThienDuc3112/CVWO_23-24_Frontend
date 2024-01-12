@@ -9,6 +9,8 @@ import CreatePostPage from "./pages/CreatePost/CreatePostPage";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
 import Rules from "./pages/Rules/Rules";
 import TopPost from "./pages/TopPost/TopPost";
+import EditPost from "./pages/Edit/Post";
+import EditThread from "./pages/Edit/Thread";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/t/:threadid" element={<ThreadPage />} />
           <Route path="/create" element={<CreatePostPage />} />
+          <Route path="/edit/post/:postId" element={<EditPost />} />
+          <Route path="/edit/thread/:threadId" element={<EditThread />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/toppost" element={<TopPost />} />
           <Route path="/rules" element={<Rules />} />
