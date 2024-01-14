@@ -2,7 +2,13 @@ import { Divider, Grid, Paper, Typography } from "@mui/material";
 import { ICategory } from "../../interfaces/Catagory";
 import { Link } from "react-router-dom";
 
-const CategoryCard = ({ name, description, postCount, colour }: ICategory) => {
+const CategoryCard = ({
+  id,
+  name,
+  description,
+  postCount,
+  colour,
+}: ICategory) => {
   return (
     <Paper
       variant="outlined"
@@ -15,7 +21,7 @@ const CategoryCard = ({ name, description, postCount, colour }: ICategory) => {
             variant="h5"
             component={Link}
             sx={{ textDecoration: "none", color: "inherit" }}
-            to={`/c/${name}`}
+            to={`/c/${id}`}
           >
             {name}
           </Typography>

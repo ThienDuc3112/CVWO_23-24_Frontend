@@ -52,7 +52,9 @@ const Post = ({
   return (
     <Paper elevation={3} sx={{ my: 2, p: 2 }}>
       <Stack direction={"row"}>
-        <VoteSidebar {...{ upvotes, id, preview }} />
+        <VoteSidebar
+          {...{ upvotes, id, preview, isThread: isThread.current }}
+        />
         <Container disableGutters>
           <MuiMarkdown>{content}</MuiMarkdown>
         </Container>

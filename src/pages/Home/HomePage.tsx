@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Divider, Grid, Typography } from "@mui/material";
 import ThreadList from "../../components/threadList/ThreadList";
 import CategoryList from "../../components/categoryList/CategoryList";
 import SearchBar from "../../components/searchBar/SearchBar";
@@ -28,6 +28,8 @@ const HomePage = () => {
           sx={{ height: "100%" }}
           order={{ xs: 2, md: 1 }}
         >
+          <Typography variant="h5">Recent posts</Typography>
+          <Divider />
           <ThreadList />
         </Grid>
         <Grid

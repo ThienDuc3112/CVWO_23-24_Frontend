@@ -9,6 +9,7 @@ const SearchBar = () => {
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(searchTerm);
+    alert("Not implemented");
   };
   return (
     <Box

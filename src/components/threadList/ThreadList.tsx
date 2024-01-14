@@ -1,8 +1,9 @@
-import { Divider, List, ListItem, Typography } from "@mui/material";
+import { List, ListItem, Typography } from "@mui/material";
 import { useFetch } from "../../hooks/useFetch";
 import ThreadCard from "./ThreadCard";
 import { IThreadPreview } from "../../interfaces/Post";
 import { API_URL } from "../../costants";
+import { useRef } from "react";
 
 const ThreadList = ({
   sortByUpvote,
@@ -11,14 +12,15 @@ const ThreadList = ({
   sortByUpvote?: boolean;
   thread?: string;
 }) => {
-  const { data, err } = useFetch<IThreadPreview[]>(`${API_URL}/thread`);
-  console.log(data, err);
+  const url = useRef(`${API_URL}/thread`);
+  if (thread) {
+    url.current = `${API_URL}/category/${thread}`;
+  }
+  const { data, err } = useFetch<IThreadPreview[]>(url.current);
   if (err) return <Typography>There was an error</Typography>;
   if (!data) return <Typography>Loading...</Typography>;
   return (
     <>
-      <Typography variant="h5">Recent posts</Typography>
-      <Divider />
       <List>
         {data.map((post) => (
           <ListItem key={post.id}>

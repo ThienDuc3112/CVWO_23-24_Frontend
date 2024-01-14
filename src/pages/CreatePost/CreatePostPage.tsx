@@ -11,6 +11,8 @@ import { FormEvent, useState } from "react";
 import Post from "../../components/post/Post";
 import { API_URL } from "../../costants";
 import { useNavigate } from "react-router-dom";
+import { useFetch } from "../../hooks/useFetch";
+import { ICategory } from "../../interfaces/Catagory";
 
 const CreatePostPage = () => {
   const navigate = useNavigate();
@@ -18,6 +20,9 @@ const CreatePostPage = () => {
   const [category, setCategory] = useState("" as number | "");
   const [title, setTitle] = useState("");
   const [username, setUsername] = useState("");
+  const { data, err } = useFetch<ICategory[]>(`${API_URL}/category`);
+  if (err) return <Typography>Error</Typography>;
+  if (!data) return <Typography>Loading...</Typography>;
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetch(`${API_URL}/thread`, {
@@ -88,9 +93,9 @@ const CreatePostPage = () => {
               sx={{ mb: 1 }}
               variant="filled"
             >
-              {[1].map((category) => (
-                <MenuItem key={category} value={category}>
-                  Category {category}{" "}
+              {data.map((category) => (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.name}
                 </MenuItem>
               ))}
             </TextField>
