@@ -19,24 +19,17 @@ import {
   Campaign,
   Gavel,
   AddCircle,
-  Person,
   Home,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 250;
-const options = [
-  ["Home", "Top post", "News", "Rules"],
-  ["New thread", "Profile"],
-];
+const options = [["Home", "Top post", "News", "Rules"], ["New thread"]];
 const icons = [
   [<Home />, <LocalFireDepartment />, <Campaign />, <Gavel />],
-  [<AddCircle />, <Person />],
+  [<AddCircle />],
 ];
-const paths = [
-  ["/", "/toppost", "/news", "/rules"],
-  ["/create", "/dashboard"],
-];
+const paths = [["/", "/toppost", "/news", "/rules"], ["/create"]];
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,

@@ -59,7 +59,7 @@ const Post = ({
           <MuiMarkdown>{content}</MuiMarkdown>
         </Container>
       </Stack>
-      <Divider sx={{ mx: 2 }} />
+      <Divider sx={{ mx: 2, my: 1 }} />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
           <Button

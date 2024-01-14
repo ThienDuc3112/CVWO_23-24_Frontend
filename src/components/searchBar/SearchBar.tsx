@@ -1,15 +1,17 @@
 import { Search } from "@mui/icons-material";
 import { Box, ButtonBase, InputBase, Paper } from "@mui/material";
 import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const [disabled, setDisabled] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const navigate = useNavigate();
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(searchTerm);
-    alert("Not implemented");
+    setDisabled(true);
+    navigate(`/search/${searchTerm}`);
+    setDisabled(false);
   };
   return (
     <Box

@@ -30,7 +30,7 @@ const ThreadCard = ({
   return (
     <Paper elevation={4}>
       <Box>
-        <VoteSidebar upvotes={upvotes} id={id} />
+        <VoteSidebar isThread={true} upvotes={upvotes} id={id} />
       </Box>
       <Box
         component={Link}

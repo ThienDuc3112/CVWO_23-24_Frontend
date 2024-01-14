@@ -12,6 +12,7 @@ import TopPost from "./pages/TopPost/TopPost";
 import EditPost from "./pages/Edit/Post";
 import EditThread from "./pages/Edit/Thread";
 import Category from "./pages/Category/Category";
+import Search from "./pages/Search/Search";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/toppost" element={<TopPost />} />
           <Route path="/c/:id" element={<Category />} />
           <Route path="/rules" element={<Rules />} />
+          <Route path="/search/:term" element={<Search />} />
         </Routes>
       </Container>
     </>
