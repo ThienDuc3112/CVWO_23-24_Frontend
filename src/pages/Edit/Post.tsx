@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../../costants";
 import { IPost } from "../../interfaces/Post";
 import { useFetch } from "../../hooks/useFetch";
+import Post from "../../components/post/Post";
 
 const EditPost = () => {
   const { postId } = useParams();
@@ -72,6 +73,16 @@ const EditPost = () => {
           Submit
         </Button>
       </form>
+      <Typography variant="h1">Preview</Typography>
+      <Post
+        thred_id={-1}
+        preview={true}
+        content={post}
+        created_at={new Date().toISOString()}
+        id={-1}
+        upvotes={0}
+        username={username}
+      />
     </Stack>
   );
 };

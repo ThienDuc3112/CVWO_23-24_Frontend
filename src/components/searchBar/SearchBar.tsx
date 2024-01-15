@@ -42,7 +42,7 @@ const SearchBar = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             sx={{ width: "100%" }}
-            placeholder="search..."
+            placeholder="Search for thread"
           />
         </Paper>
       </form>

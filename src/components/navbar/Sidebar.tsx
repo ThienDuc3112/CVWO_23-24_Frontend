@@ -16,7 +16,6 @@ import { useState } from "react";
 import {
   Menu,
   LocalFireDepartment,
-  Campaign,
   Gavel,
   AddCircle,
   Home,
@@ -24,12 +23,9 @@ import {
 import { Link } from "react-router-dom";
 
 const drawerWidth = 250;
-const options = [["Home", "Top post", "News", "Rules"], ["New thread"]];
-const icons = [
-  [<Home />, <LocalFireDepartment />, <Campaign />, <Gavel />],
-  [<AddCircle />],
-];
-const paths = [["/", "/toppost", "/news", "/rules"], ["/create"]];
+const options = [["Home", "Top post", "Rules"], ["New thread"]];
+const icons = [[<Home />, <LocalFireDepartment />, <Gavel />], [<AddCircle />]];
+const paths = [["/", "/toppost", "/rules"], ["/create"]];
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
