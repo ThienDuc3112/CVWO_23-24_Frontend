@@ -13,6 +13,7 @@ import EditPost from "./pages/Edit/Post";
 import EditThread from "./pages/Edit/Thread";
 import Category from "./pages/Category/Category";
 import Search from "./pages/Search/Search";
+import Singup from "./pages/Signup/Singup";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<Singup />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/t/:threadid" element={<ThreadPage />} />
           <Route path="/create" element={<CreatePostPage />} />
