@@ -3,7 +3,7 @@ import {
   CssBaseline,
   ThemeProvider as MThemeProvider,
 } from "@mui/material";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext } from "react";
 
 const theme = createTheme({
   palette: {

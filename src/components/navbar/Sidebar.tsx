@@ -12,20 +12,32 @@ import {
   ListItemButton,
   Box,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Menu,
   LocalFireDepartment,
   Gavel,
   AddCircle,
   Home,
+  Login,
+  Person,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { useUserContext } from "../../contexts/UserContext";
 
 const drawerWidth = 250;
-const options = [["Home", "Top post", "Rules"], ["New thread"]];
-const icons = [[<Home />, <LocalFireDepartment />, <Gavel />], [<AddCircle />]];
-const paths = [["/", "/toppost", "/rules"], ["/create"]];
+const options = [
+  ["Home", "Top post", "Rules"],
+  ["Login", "New thread"],
+];
+const icons = [
+  [<Home />, <LocalFireDepartment />, <Gavel />],
+  [<Login />, <AddCircle />],
+];
+const paths = [
+  ["/", "/toppost", "/rules"],
+  ["/login", "/create"],
+];
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -102,6 +114,7 @@ const Drawer = styled(MUIDrawer, {
 }));
 
 const Sidebar = () => {
+  const { login } = useUserContext();
   const [open, setOpen] = useState(false);
   return (
     <>
