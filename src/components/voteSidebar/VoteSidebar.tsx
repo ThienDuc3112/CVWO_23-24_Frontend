@@ -25,7 +25,11 @@ const VoteSidebar = ({
     const url = `${API_URL}/${isThread ? "thread" : "followup"}/${
       action ? "upvote" : "downvote"
     }/${id}`;
-    fetch(url)
+    fetch(url, {
+      headers: {
+        Authorization: `${window.localStorage.getItem("authToken")}`,
+      },
+    })
       .then((res) => {
         if (res.ok) {
           setUpvote((prev) => (action ? prev + 1 : prev - 1));

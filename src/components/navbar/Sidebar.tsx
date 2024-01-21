@@ -12,7 +12,7 @@ import {
   ListItemButton,
   Box,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   Menu,
   LocalFireDepartment,
@@ -26,19 +26,6 @@ import { Link } from "react-router-dom";
 import { useUserContext } from "../../contexts/UserContext";
 
 const drawerWidth = 250;
-const options = [
-  ["Home", "Top post", "Rules"],
-  ["Login", "New thread"],
-];
-const icons = [
-  [<Home />, <LocalFireDepartment />, <Gavel />],
-  [<Login />, <AddCircle />],
-];
-const paths = [
-  ["/", "/toppost", "/rules"],
-  ["/login", "/create"],
-];
-
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -60,17 +47,23 @@ const closedMixin = (theme: Theme): CSSObject => ({
   },
 });
 
-const OptionList = ({ num, open }: { num: number; open: boolean }) => (
+const OptionList = ({
+  options,
+  open,
+}: {
+  options: { label: string; icon: ReactNode; path: string }[];
+  open: boolean;
+}) => (
   <List>
-    {options[num].map((text, index) => (
+    {options.map((path, index) => (
       <ListItem
-        key={text}
+        key={index}
         disablePadding
         sx={{ display: "block", textDecoration: "none" }}
       >
         <Link
           style={{ textDecoration: "inherit", color: "inherit" }}
-          to={paths[num][index]}
+          to={path.path}
         >
           <ListItemButton
             sx={{
@@ -86,9 +79,9 @@ const OptionList = ({ num, open }: { num: number; open: boolean }) => (
                 justifyContent: "center",
               }}
             >
-              {icons[num][index]}
+              {path.icon}
             </ListItemIcon>
-            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+            <ListItemText primary={path.label} sx={{ opacity: open ? 1 : 0 }} />
           </ListItemButton>
         </Link>
       </ListItem>
@@ -114,7 +107,33 @@ const Drawer = styled(MUIDrawer, {
 }));
 
 const Sidebar = () => {
+  const [navOptions, setNavOptions] = useState({
+    top: [
+      { label: "Home", icon: <Home />, path: "/" },
+      { label: "Top posts", icon: <LocalFireDepartment />, path: "/toppost" },
+      { label: "Rules", icon: <Gavel />, path: "/rules" },
+    ],
+    bottom: [
+      { label: "Login", icon: <Login />, path: "/login" },
+      { label: "New thread", icon: <AddCircle />, path: "/create" },
+    ],
+  });
   const { login } = useUserContext();
+  useEffect(() => {
+    if (login) {
+      setNavOptions({
+        top: navOptions.top,
+        bottom: [
+          {
+            label: "Profile",
+            icon: <Person />,
+            path: "/profile",
+          },
+          navOptions.bottom[1],
+        ],
+      });
+    }
+  }, [login]);
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -131,8 +150,8 @@ const Sidebar = () => {
             height: "100%",
           }}
         >
-          <OptionList num={0} open />
-          <OptionList num={1} open />
+          <OptionList options={navOptions.top} open />
+          <OptionList options={navOptions.bottom} open />
         </Box>
       </Drawer>
     </>

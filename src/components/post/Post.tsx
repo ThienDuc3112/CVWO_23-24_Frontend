@@ -11,7 +11,7 @@ import VoteSidebar from "../voteSidebar/VoteSidebar";
 import MuiMarkdown from "mui-markdown";
 import { convertTimestamp } from "../../helpers/timestampToDateString";
 import { API_URL } from "../../costants";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Post = ({
@@ -24,6 +24,7 @@ const Post = ({
   thred_id,
 }: IPost & { preview?: boolean }) => {
   const navigation = useNavigate();
+  const [deleted, setDeleted] = useState(false);
   const url = useRef(`${API_URL}/followup`);
   const isThread = useRef(false);
   if (!preview && id == -1) {
@@ -34,9 +35,13 @@ const Post = ({
   const deleteHandler = () => {
     fetch(`${url.current}/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("authToken")}`,
+      },
     }).then((res) => {
       if (res.ok) {
         alert("Post deleted");
+        setDeleted(true);
       } else {
         alert("Error in deleting post");
       }
@@ -49,6 +54,7 @@ const Post = ({
       navigation(`/edit/post/${id}`);
     }
   };
+  if (deleted) return <></>;
   return (
     <Paper elevation={3} sx={{ my: 2, p: 2 }}>
       <Stack direction={"row"}>

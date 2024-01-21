@@ -2,6 +2,7 @@ import { Button, Divider, Stack, TextField, Typography } from "@mui/material";
 import { FormEventHandler, useState } from "react";
 import { API_URL } from "../../costants";
 import { Link, useNavigate } from "react-router-dom";
+import { useUserContext } from "../../contexts/UserContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const LoginPage = () => {
     username: undefined as string | undefined,
     password: undefined as string | undefined,
   });
+  const { setLogin } = useUserContext();
   const submitHandler: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     fetch(`${API_URL}/users/login`, {
@@ -26,6 +28,7 @@ const LoginPage = () => {
       res.json().then((data) => {
         if (res.ok) {
           window.localStorage.setItem("authToken", data.token);
+          setLogin(true);
           alert("Login");
           navigate("/");
         } else {

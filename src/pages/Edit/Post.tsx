@@ -26,6 +26,7 @@ const EditPost = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${window.localStorage.getItem("authToken")}`,
       },
       body: JSON.stringify({ post: { username, content: post } }),
     }).then((res) => {

@@ -46,6 +46,7 @@ const EditThread = () => {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",
+        Authorization: `Bearer ${window.localStorage.getItem("authToken")}`,
       },
     })
       .then((res) => {

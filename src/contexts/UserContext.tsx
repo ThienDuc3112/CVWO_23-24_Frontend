@@ -24,7 +24,12 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((res) => (res.ok ? setLogin(true) : null))
+      .then((res) => {
+        if (res.ok) {
+          setLogin(true);
+          console.log(true);
+        }
+      })
       .catch((err) => {
         console.error(err);
         alert("An error occured");

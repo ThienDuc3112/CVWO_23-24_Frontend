@@ -37,6 +37,7 @@ const CreatePostPage = () => {
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        Authorization: `${window.localStorage.getItem("authToken")}`,
       },
     })
       .then((res) => {
