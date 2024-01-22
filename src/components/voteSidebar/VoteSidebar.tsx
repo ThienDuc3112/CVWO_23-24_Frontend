@@ -34,7 +34,14 @@ const VoteSidebar = ({
         if (res.ok) {
           setUpvote((prev) => (action ? prev + 1 : prev - 1));
         } else {
-          alert(`Error with code ${res.status}`);
+          switch (res.status) {
+            case 401:
+              alert("You aren't login");
+              break;
+            default:
+              alert(`Error with code ${res.status}`);
+              break;
+          }
         }
       })
       .catch((err) => {

@@ -3,7 +3,6 @@ import Sidebar from "./components/navbar/Sidebar";
 import { Container } from "@mui/material";
 import HomePage from "./pages/Home/HomePage";
 import LoginPage from "./pages/Login/LoginPage";
-import RegisterPage from "./pages/Register/RegisterPage";
 import ThreadPage from "./pages/Thread/ThreadPage";
 import CreatePostPage from "./pages/CreatePost/CreatePostPage";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
@@ -26,8 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<Singup />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/register" element={<Singup />} />
           <Route path="/t/:threadid" element={<ThreadPage />} />
           <Route path="/create" element={<CreatePostPage />} />
           <Route path="/edit/post/:postId" element={<EditPost />} />

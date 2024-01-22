@@ -13,20 +13,23 @@ import { convertTimestamp } from "../../helpers/timestampToDateString";
 import { API_URL } from "../../costants";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../../contexts/UserContext";
 
 const Post = ({
   upvotes,
   content,
-  username,
+  user: author,
   created_at,
   id,
   preview,
   thred_id,
+  user_id,
 }: IPost & { preview?: boolean }) => {
   const navigation = useNavigate();
   const [deleted, setDeleted] = useState(false);
   const url = useRef(`${API_URL}/followup`);
   const isThread = useRef(false);
+  const { user } = useUserContext();
   if (!preview && id == -1) {
     id = thred_id;
     url.current = `${API_URL}/thread`;
@@ -42,6 +45,7 @@ const Post = ({
       if (res.ok) {
         alert("Post deleted");
         setDeleted(true);
+        if (isThread) navigation("/");
       } else {
         alert("Error in deleting post");
       }
@@ -67,37 +71,41 @@ const Post = ({
       </Stack>
       <Divider sx={{ mx: 2, my: 1 }} />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div>
-          <Button
-            variant="contained"
-            sx={{ mx: 1, height: "28px" }}
-            onClick={
-              preview
-                ? () => {
-                    alert("Preview mode");
-                  }
-                : editHandler
-            }
-          >
-            Edit
-          </Button>
-          <Button
-            variant="contained"
-            color="error"
-            sx={{ mx: 1, height: "28px" }}
-            onClick={
-              preview
-                ? () => {
-                    alert("Preview mode");
-                  }
-                : deleteHandler
-            }
-          >
-            Delete
-          </Button>
-        </div>
+        {user_id == user?.id || user?.is_admin ? (
+          <div>
+            <Button
+              variant="contained"
+              sx={{ mx: 1, height: "28px" }}
+              onClick={
+                preview
+                  ? () => {
+                      alert("Preview mode");
+                    }
+                  : editHandler
+              }
+            >
+              Edit
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              sx={{ mx: 1, height: "28px" }}
+              onClick={
+                preview
+                  ? () => {
+                      alert("Preview mode");
+                    }
+                  : deleteHandler
+              }
+            >
+              Delete
+            </Button>
+          </div>
+        ) : (
+          <div></div>
+        )}
         <Typography sx={{ textAlign: "right", mx: 2 }}>
-          {username} - {convertTimestamp(created_at)}
+          {author?.username} - {convertTimestamp(created_at)}
         </Typography>
       </div>
     </Paper>

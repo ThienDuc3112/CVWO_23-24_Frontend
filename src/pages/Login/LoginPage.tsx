@@ -28,7 +28,8 @@ const LoginPage = () => {
       res.json().then((data) => {
         if (res.ok) {
           window.localStorage.setItem("authToken", data.token);
-          setLogin(true);
+          setLogin(data.user);
+          console.log(data.user);
           alert("Login");
           navigate("/");
         } else {
@@ -82,7 +83,7 @@ const LoginPage = () => {
         <Typography>New here? Sign up now!</Typography>
         <Button variant="contained" sx={{ my: 1 }}>
           <Link
-            to={"/signup"}
+            to={"/register"}
             style={{
               width: "100%",
               textDecoration: "inherit",

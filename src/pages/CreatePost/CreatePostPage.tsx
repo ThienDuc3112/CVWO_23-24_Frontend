@@ -13,6 +13,7 @@ import { API_URL } from "../../costants";
 import { useNavigate } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import { ICategory } from "../../interfaces/Catagory";
+import { useUserContext } from "../../contexts/UserContext";
 
 const CreatePostPage = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const CreatePostPage = () => {
   const [category, setCategory] = useState("" as number | "");
   const [title, setTitle] = useState("");
   const [username, setUsername] = useState("");
+  const { user } = useUserContext();
   const { data, err } = useFetch<ICategory[]>(`${API_URL}/category`);
   if (err) return <Typography>Error</Typography>;
   if (!data) return <Typography>Loading...</Typography>;
@@ -55,6 +57,8 @@ const CreatePostPage = () => {
         console.error(err);
       });
   };
+  if (user == null)
+    return <Typography variant="h3">You're not login</Typography>;
   return (
     <Container>
       <Typography variant="h1">Create a thread</Typography>
@@ -127,9 +131,10 @@ const CreatePostPage = () => {
           preview={true}
           content={post}
           created_at={new Date().toISOString()}
-          id={-1}
+          id={user.id}
           upvotes={0}
-          username={username}
+          user={{ username: user.username }}
+          user_id={-1}
         />
       </Container>
     </Container>

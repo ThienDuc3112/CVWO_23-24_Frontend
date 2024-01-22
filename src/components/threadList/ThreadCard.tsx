@@ -22,7 +22,7 @@ const Paper = styled(MUIPaper)({
 
 const ThreadCard = ({
   id,
-  username,
+  user,
   created_at,
   title,
   upvotes,
@@ -49,7 +49,7 @@ const ThreadCard = ({
           }}
         >
           <Typography variant="subtitle2">
-            {username} - {convertTimestamp(created_at)}
+            {user?.username} - {convertTimestamp(created_at)}
           </Typography>
         </Container>
       </Box>

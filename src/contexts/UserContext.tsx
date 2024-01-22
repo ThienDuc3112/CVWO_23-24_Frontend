@@ -6,16 +6,17 @@ import {
   useState,
 } from "react";
 import { API_URL } from "../costants";
+import { IUser } from "../interfaces/User";
 
 const userContext = createContext({
-  login: false,
-  setLogin: (state: boolean) => {},
+  user: null as IUser | null,
+  setLogin: (user: IUser | null) => {},
 });
 
 export const useUserContext = () => useContext(userContext);
 
 const UserContextProvider = ({ children }: { children: ReactNode }) => {
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(null as IUser | null);
   useEffect(() => {
     const token = window.localStorage.getItem("authToken");
     if (!token) return;
@@ -26,8 +27,7 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
     })
       .then((res) => {
         if (res.ok) {
-          setLogin(true);
-          console.log(true);
+          res.json().then((data: IUser) => setLogin(data));
         }
       })
       .catch((err) => {
@@ -36,7 +36,7 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
       });
   }, []);
   return (
-    <userContext.Provider value={{ login, setLogin }}>
+    <userContext.Provider value={{ user: login, setLogin }}>
       {children}
     </userContext.Provider>
   );

@@ -113,27 +113,20 @@ const Sidebar = () => {
       { label: "Top posts", icon: <LocalFireDepartment />, path: "/toppost" },
       { label: "Rules", icon: <Gavel />, path: "/rules" },
     ],
-    bottom: [
-      { label: "Login", icon: <Login />, path: "/login" },
-      { label: "New thread", icon: <AddCircle />, path: "/create" },
-    ],
+    bottom: [{ label: "Login", icon: <Login />, path: "/login" }],
   });
-  const { login } = useUserContext();
+  const { user } = useUserContext();
   useEffect(() => {
-    if (login) {
+    if (user) {
       setNavOptions({
         top: navOptions.top,
         bottom: [
-          {
-            label: "Profile",
-            icon: <Person />,
-            path: "/profile",
-          },
-          navOptions.bottom[1],
+          { label: "Profile", icon: <Person />, path: "/profile" },
+          { label: "New thread", icon: <AddCircle />, path: "/create" },
         ],
       });
     }
-  }, [login]);
+  }, [user]);
   const [open, setOpen] = useState(false);
   return (
     <>
