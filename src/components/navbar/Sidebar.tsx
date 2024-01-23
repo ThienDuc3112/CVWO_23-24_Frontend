@@ -21,6 +21,7 @@ import {
   Home,
   Login,
   Person,
+  Create,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useUserContext } from "../../contexts/UserContext";
@@ -118,12 +119,23 @@ const Sidebar = () => {
   const { user } = useUserContext();
   useEffect(() => {
     if (user) {
+      let newOptions = [
+        { label: "Profile", icon: <Person />, path: `/profile/${user.id}` },
+        { label: "New thread", icon: <AddCircle />, path: "/create" },
+      ];
+      if (user.is_admin)
+        newOptions = [
+          newOptions[0],
+          {
+            label: "New category",
+            icon: <Create />,
+            path: `/newcategory`,
+          },
+          newOptions[1],
+        ];
       setNavOptions({
         top: navOptions.top,
-        bottom: [
-          { label: "Profile", icon: <Person />, path: "/profile" },
-          { label: "New thread", icon: <AddCircle />, path: "/create" },
-        ],
+        bottom: newOptions,
       });
     }
   }, [user]);

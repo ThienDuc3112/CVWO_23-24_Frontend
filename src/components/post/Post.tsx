@@ -12,7 +12,7 @@ import MuiMarkdown from "mui-markdown";
 import { convertTimestamp } from "../../helpers/timestampToDateString";
 import { API_URL } from "../../costants";
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../contexts/UserContext";
 
 const Post = ({
@@ -105,7 +105,12 @@ const Post = ({
           <div></div>
         )}
         <Typography sx={{ textAlign: "right", mx: 2 }}>
-          {author?.username} - {convertTimestamp(created_at)}
+          <Link
+            to={`/profile/${user_id}`}
+            style={{ textDecoration: "inherit", color: "inherit" }}
+          >
+            {author?.username} - {convertTimestamp(created_at)}
+          </Link>
         </Typography>
       </div>
     </Paper>

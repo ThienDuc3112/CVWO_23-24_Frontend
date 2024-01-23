@@ -7,13 +7,16 @@ import { useRef } from "react";
 
 const ThreadList = ({
   sortByUpvote,
-  thread,
+  category,
+  user_id,
 }: {
   sortByUpvote?: boolean;
-  thread?: string;
+  category?: string;
+  user_id?: string;
 }) => {
   const url = useRef(`${API_URL}/thread`);
-  if (thread) url.current = `${API_URL}/category/${thread}`;
+  if (category) url.current = `${API_URL}/category/${category}`;
+  else if (user_id) url.current = `${API_URL}/thread/user/${user_id}`;
   const { data, err } = useFetch<IThreadPreview[]>(url.current);
   if (err) return <Typography>There was an error</Typography>;
   if (!data) return <Typography>Loading...</Typography>;
@@ -21,11 +24,15 @@ const ThreadList = ({
   return (
     <>
       <List>
-        {data.map((post) => (
-          <ListItem key={post.id}>
-            <ThreadCard {...post} />
-          </ListItem>
-        ))}
+        {data.length > 0 ? (
+          data.map((post) => (
+            <ListItem key={post.id}>
+              <ThreadCard {...post} />
+            </ListItem>
+          ))
+        ) : (
+          <Typography>No posts here...</Typography>
+        )}
       </List>
     </>
   );

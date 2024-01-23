@@ -40,6 +40,8 @@ const HomePage = () => {
           sx={{ height: "100%" }}
           order={{ xs: 1, md: 2 }}
         >
+          <Typography variant="h5">Categories</Typography>
+          <Divider />
           <CategoryList />
         </Grid>
       </Grid>

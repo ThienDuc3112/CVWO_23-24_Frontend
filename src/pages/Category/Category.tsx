@@ -8,7 +8,7 @@ const Category = () => {
     <Stack width={"80%"} m={"auto"}>
       <Typography variant="h1">Showing filtered results</Typography>
       <Divider />
-      <ThreadList thread={id} />
+      <ThreadList category={id} />
     </Stack>
   );
 };

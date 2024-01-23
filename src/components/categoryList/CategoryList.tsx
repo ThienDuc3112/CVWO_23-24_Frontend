@@ -10,8 +10,6 @@ const CategoryList = () => {
   if (!data) return <Typography>Loading...</Typography>;
   return (
     <>
-      <Typography variant="h5">Categories</Typography>
-      <Divider />
       <Stack gap={0} pt={2}>
         {data.map((category) => (
           <CategoryCard key={category.name} {...category} />
