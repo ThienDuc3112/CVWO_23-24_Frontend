@@ -12,6 +12,7 @@ import {
 import Post from "../../components/post/Post";
 import { useFetch } from "../../hooks/useFetch";
 import { IThread } from "../../interfaces/Post";
+import { ICategory } from "../../interfaces/Catagory";
 
 const EditThread = () => {
   const navigate = useNavigate();
@@ -20,6 +21,9 @@ const EditThread = () => {
   const [category, setCategory] = useState("" as number | "");
   const [title, setTitle] = useState("");
   const { data, err } = useFetch<IThread>(`${API_URL}/thread/${threadId}`);
+  const { data: categories, err: categoryErr } = useFetch<ICategory[]>(
+    `${API_URL}/category`
+  );
   useEffect(() => {
     if (data) {
       setPost(data.content);
@@ -27,8 +31,8 @@ const EditThread = () => {
       setTitle(data.title);
     }
   }, [data]);
-  if (err) return <Typography>Error</Typography>;
-  if (!data) return <Typography>Loading</Typography>;
+  if (err || categoryErr) return <Typography>Error</Typography>;
+  if (!data || !categories) return <Typography>Loading</Typography>;
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetch(`${API_URL}/thread/${threadId}`, {
@@ -85,9 +89,9 @@ const EditThread = () => {
             sx={{ mb: 1 }}
             variant="filled"
           >
-            {[1].map((category) => (
-              <MenuItem key={category} value={category}>
-                Category {category}{" "}
+            {categories.map((category, index) => (
+              <MenuItem key={index} value={category.id}>
+                {category.name}
               </MenuItem>
             ))}
           </TextField>
