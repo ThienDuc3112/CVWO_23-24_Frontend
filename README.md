@@ -4,7 +4,7 @@ This is the repo for the backend of my CVWO winter 23-24 submission
 
 Checkout my [Backend repo](https://github.com/ThienDuc3112/CVWO_23-24_Backend)
 
-How to use: 
+## How to use: 
 
 - Clone this repo
 - Install all dependencies
@@ -13,8 +13,22 @@ How to use:
 - Run with `npm run dev`
 - Go to the link vite provide
 
-User manual:
-- The first user will be an admin, all subsequent users will be normal user.
-- Admin can create and delete categories, as well as edit/delete other users Thread and Follow ups
-- To make a user admin, you can go to the rails server directory and open rails console, find the user with `User.find(id)` and set `is_admin` to true
-- The content of a threads and follow ups can be multiline and use markdown 
+## User manual:
+
+Central design:
+The forum is design around 3 main models: 
+- Threads: This is the central piece of the forum. The thread that has title, content, user and upvotes/downvotes. This can contain many follow ups, and belongs to a category. This is also the only thing that the search function will search for. Any users can create/read/update/delete a thread (Provided they are the creator of the thread or they are an admin). Upon deletion, it’s follow ups will also be deleted
+- Category: A grouping of threads of similar topics, only admin are allowed to create or delete a category, and deleting it will cause all threads under it to be deleted as well.
+- Follow ups: The responses to threads, sorted by created time. It has everything a thread has except for a title. Every users can create/read/update/delete a follow up (Provided appropriate role)
+
+User:
+Users can see other users' profiles, and see their threads and follow ups that they have posted. A user account can be created (sign up) and read (profile page), and is essential for creating/updating/deleting threads and follow ups, as well as upvote/downvote.
+
+Admin: 
+If the web app is hosted on a local machine, the very first user created will automatically become admin. Admins can create and delete a category, as well as performing all CRUD operations on other users threads/follow ups. To assign more admins, the app hoster can go to the backend console and set the is_admin attribute of a user to true.
+
+Other features / designs:
+- Search: will search for title and content of threads, doesn’t work on follow up
+- Top post: Sorted all the post by their amount of upvotes
+- Upvote and downvote: Any login user can upvote / downvote a thread or follow up as many times as they want.
+- Markdown: Threads and post can be written with markdown
