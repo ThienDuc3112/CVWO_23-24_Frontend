@@ -14,6 +14,7 @@ import Search from "./pages/Search/Search";
 import Singup from "./pages/Signup/Singup";
 import Profile from "./pages/Profile/Profile";
 import CreateCategory from "./pages/CreateCategory/CreateCategory";
+import Logout from "./pages/Logout/Logout";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Singup />} />
           <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/logout" element={<Logout />} />
 
           {/* Different view pages */}
           <Route path="/rules" element={<Rules />} />

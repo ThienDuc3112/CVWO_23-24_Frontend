@@ -9,13 +9,11 @@ import Post from "../../components/post/Post";
 const EditPost = () => {
   const { postId } = useParams();
   const navigation = useNavigate();
-  const [username, setUsername] = useState("");
   const [post, setPost] = useState("");
 
   const { data, err } = useFetch<IPost>(`${API_URL}/followup/${postId}`);
   useEffect(() => {
     if (!data) return;
-    setUsername(data.username);
     setPost(data.content);
   }, [data]);
   if (err) return <Typography>Error</Typography>;
@@ -28,7 +26,7 @@ const EditPost = () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${window.localStorage.getItem("authToken")}`,
       },
-      body: JSON.stringify({ post: { username, content: post } }),
+      body: JSON.stringify({ post: { content: post } }),
     }).then((res) => {
       if (res.ok) {
         res.json().then((data: IPost) => {
@@ -44,17 +42,6 @@ const EditPost = () => {
     <Stack sx={{ width: "80%", m: "auto" }}>
       <Typography variant="h1">Edit your post</Typography>
       <form onSubmit={submitHandler}>
-        <TextField
-          label="Username"
-          placeholder="What do you go by?"
-          value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-          variant="filled"
-          fullWidth
-          sx={{ my: 1 }}
-        />
         <TextField
           variant="filled"
           value={post}
@@ -82,7 +69,8 @@ const EditPost = () => {
         created_at={new Date().toISOString()}
         id={-1}
         upvotes={0}
-        username={username}
+        user={data.user}
+        user_id={data.user_id}
       />
     </Stack>
   );

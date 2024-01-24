@@ -22,6 +22,7 @@ import {
   Login,
   Person,
   Create,
+  Logout,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useUserContext } from "../../contexts/UserContext";
@@ -122,6 +123,7 @@ const Sidebar = () => {
       let newOptions = [
         { label: "Profile", icon: <Person />, path: `/profile/${user.id}` },
         { label: "New thread", icon: <AddCircle />, path: "/create" },
+        { label: "Sign out", icon: <Logout />, path: "/logout" },
       ];
       if (user.is_admin)
         newOptions = [
@@ -131,14 +133,19 @@ const Sidebar = () => {
             icon: <Create />,
             path: `/newcategory`,
           },
-          newOptions[1],
+          ...newOptions.slice(1),
         ];
       setNavOptions({
         top: navOptions.top,
         bottom: newOptions,
       });
+    } else {
+      setNavOptions({
+        top: navOptions.top,
+        bottom: [{ label: "Login", icon: <Login />, path: "/login" }],
+      });
     }
-  }, [user]);
+  }, [navOptions.top, user]);
   const [open, setOpen] = useState(false);
   return (
     <>

@@ -23,12 +23,12 @@ const Profile = () => {
         Role: {user.is_admin ? "Admin" : "User"}
       </Typography>
       <Grid direction={"row"} container my={2}>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Typography variant="h1">Threads</Typography>
           <Divider sx={{ mx: 2 }} />
           <ThreadList user_id={id} />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Typography variant="h1">Follow ups</Typography>
           <Divider sx={{ mx: 2 }} />
           {err ? (

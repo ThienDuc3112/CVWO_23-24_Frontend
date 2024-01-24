@@ -2,7 +2,6 @@ import {
   Button,
   Container,
   Divider,
-  Grid,
   MenuItem,
   TextField,
   Typography,
@@ -20,7 +19,6 @@ const CreatePostPage = () => {
   const [post, setPost] = useState("");
   const [category, setCategory] = useState("" as number | "");
   const [title, setTitle] = useState("");
-  const [username, setUsername] = useState("");
   const { user } = useUserContext();
   const { data, err } = useFetch<ICategory[]>(`${API_URL}/category`);
   if (err) return <Typography>Error</Typography>;
@@ -33,7 +31,6 @@ const CreatePostPage = () => {
           content: post,
           category,
           title,
-          username,
         },
       }),
       method: "POST",
@@ -64,47 +61,32 @@ const CreatePostPage = () => {
       <Typography variant="h1">Create a thread</Typography>
       <Container>
         <form onSubmit={submitHandler}>
-          <Grid container>
-            <Grid item xs={8} pr={1} pb={1}>
-              <TextField
-                label="Title"
-                placeholder="Title..."
-                value={title}
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-                variant="filled"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={4} pl={1} pb={1}>
-              <TextField
-                variant="filled"
-                label="Username"
-                placeholder="What you go by?"
-                value={username}
-                fullWidth
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-              />
-            </Grid>
-            <TextField
-              select
-              fullWidth
-              label="Category"
-              value={category}
-              onChange={(e) => setCategory(parseInt(e.target.value))}
-              sx={{ mb: 1 }}
-              variant="filled"
-            >
-              {data.map((category) => (
-                <MenuItem key={category.id} value={category.id}>
-                  {category.name}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Grid>
+          <TextField
+            label="Title"
+            placeholder="Title..."
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+            variant="filled"
+            fullWidth
+            sx={{ my: 1 }}
+          />
+          <TextField
+            select
+            fullWidth
+            label="Category"
+            value={category}
+            onChange={(e) => setCategory(parseInt(e.target.value))}
+            sx={{ mb: 1 }}
+            variant="filled"
+          >
+            {data.map((category) => (
+              <MenuItem key={category.id} value={category.id}>
+                {category.name}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField
             variant="filled"
             value={post}

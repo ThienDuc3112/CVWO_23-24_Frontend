@@ -27,6 +27,7 @@ const Post = ({
 }: IPost & { preview?: boolean }) => {
   const navigation = useNavigate();
   const [deleted, setDeleted] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const url = useRef(`${API_URL}/followup`);
   const isThread = useRef(false);
   const { user } = useUserContext();
@@ -36,20 +37,29 @@ const Post = ({
     isThread.current = true;
   }
   const deleteHandler = () => {
+    setDisabled(true);
     fetch(`${url.current}/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${window.localStorage.getItem("authToken")}`,
       },
-    }).then((res) => {
-      if (res.ok) {
-        alert("Post deleted");
-        setDeleted(true);
-        if (isThread) navigation("/");
-      } else {
-        alert("Error in deleting post");
-      }
-    });
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Post deleted");
+          setDeleted(true);
+          if (isThread.current) navigation("/");
+        } else {
+          alert("Error in deleting post");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("An error occured");
+      })
+      .finally(() => {
+        setDisabled(false);
+      });
   };
   const editHandler = () => {
     if (isThread.current) {
@@ -97,6 +107,7 @@ const Post = ({
                     }
                   : deleteHandler
               }
+              disabled={disabled}
             >
               Delete
             </Button>

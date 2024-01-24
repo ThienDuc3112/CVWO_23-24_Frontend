@@ -5,7 +5,6 @@ import {
   Button,
   Container,
   Divider,
-  Grid,
   MenuItem,
   TextField,
   Typography,
@@ -20,14 +19,12 @@ const EditThread = () => {
   const [post, setPost] = useState("");
   const [category, setCategory] = useState("" as number | "");
   const [title, setTitle] = useState("");
-  const [username, setUsername] = useState("");
   const { data, err } = useFetch<IThread>(`${API_URL}/thread/${threadId}`);
   useEffect(() => {
     if (data) {
       setPost(data.content);
       setCategory(data.category_id);
       setTitle(data.title);
-      setUsername(data.username);
     }
   }, [data]);
   if (err) return <Typography>Error</Typography>;
@@ -40,7 +37,6 @@ const EditThread = () => {
           content: post,
           category,
           title,
-          username,
         },
       }),
       method: "PATCH",
@@ -69,47 +65,32 @@ const EditThread = () => {
       <Typography variant="h1">Create a thread</Typography>
       <Container>
         <form onSubmit={submitHandler}>
-          <Grid container>
-            <Grid item xs={8} pr={1} pb={1}>
-              <TextField
-                label="Title"
-                placeholder="Title..."
-                value={title}
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-                variant="filled"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={4} pl={1} pb={1}>
-              <TextField
-                variant="filled"
-                label="Username"
-                placeholder="What you go by?"
-                value={username}
-                fullWidth
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-              />
-            </Grid>
-            <TextField
-              select
-              fullWidth
-              label="Category"
-              value={category}
-              onChange={(e) => setCategory(parseInt(e.target.value))}
-              sx={{ mb: 1 }}
-              variant="filled"
-            >
-              {[1].map((category) => (
-                <MenuItem key={category} value={category}>
-                  Category {category}{" "}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Grid>
+          <TextField
+            label="Title"
+            placeholder="Title..."
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+            variant="filled"
+            fullWidth
+            sx={{ my: 1 }}
+          />
+          <TextField
+            select
+            fullWidth
+            label="Category"
+            value={category}
+            onChange={(e) => setCategory(parseInt(e.target.value))}
+            sx={{ mb: 1 }}
+            variant="filled"
+          >
+            {[1].map((category) => (
+              <MenuItem key={category} value={category}>
+                Category {category}{" "}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField
             variant="filled"
             value={post}
@@ -138,7 +119,8 @@ const EditThread = () => {
           created_at={new Date().toISOString()}
           id={-1}
           upvotes={0}
-          username={username}
+          user={data.user}
+          user_id={data.user_id}
         />
       </Container>
     </Container>

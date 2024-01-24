@@ -1,4 +1,4 @@
-import { Divider, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import CategoryCard from "./CategoryCard";
 import { useFetch } from "../../hooks/useFetch";
 import { API_URL } from "../../costants";

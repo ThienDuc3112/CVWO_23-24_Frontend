@@ -1,6 +1,9 @@
-import { Divider, Grid, Paper, Typography } from "@mui/material";
+import { Button, Divider, Grid, Paper, Typography } from "@mui/material";
 import { ICategory } from "../../interfaces/Catagory";
 import { Link } from "react-router-dom";
+import { useUserContext } from "../../contexts/UserContext";
+import { useState } from "react";
+import { API_URL } from "../../costants";
 
 const CategoryCard = ({
   id,
@@ -9,6 +12,36 @@ const CategoryCard = ({
   postCount,
   colour,
 }: ICategory) => {
+  const { user } = useUserContext();
+  const [deleted, setDeleted] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const deleteHandler = () => {
+    setDisabled(true);
+    fetch(`${API_URL}/category/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("authToken")}`,
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Category deleted");
+          setDeleted(true);
+        } else {
+          alert(
+            `Error status ${res.status}\nYour session may have ended, please logout/refresh then login again`
+          );
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("An error occured");
+      })
+      .finally(() => {
+        setDisabled(false);
+      });
+  };
+  if (deleted) return <></>;
   return (
     <Paper
       variant="outlined"
@@ -32,6 +65,19 @@ const CategoryCard = ({
         </Grid>
       </Grid>
       <Divider sx={{ mt: 1 }} />
+      {user && user.is_admin && (
+        <div>
+          <Button
+            disabled={disabled}
+            onClick={deleteHandler}
+            color="error"
+            variant="contained"
+            sx={{ my: 1 }}
+          >
+            Delete
+          </Button>
+        </div>
+      )}
     </Paper>
   );
 };
