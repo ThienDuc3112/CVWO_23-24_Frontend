@@ -1,6 +1,8 @@
 # Web forum frontend
 
-This is the repo for the backend of my CVWO winter 23-24 submission
+This is the repo for the Frontend of my CVWO winter 23-24 submission
+
+Demo: https://cvwo-frontend-gbiu.onrender.com/
 
 Checkout my [Backend repo](https://github.com/ThienDuc3112/CVWO_23-24_Backend)
 
