@@ -2,7 +2,11 @@
 
 This is the repo for the Frontend of my CVWO winter 23-24 submission
 
-Demo: https://cvwo-frontend-gbiu.onrender.com/
+Demo: https://cvwo-frontend-gbiu.onrender.com/ 
+
+The backend is based on free tier hence it will not have any data, and data won't last after the server spun down
+
+The first user is always an admin and can create and delete new categories. You need categories to create a post
 
 Checkout my [Backend repo](https://github.com/ThienDuc3112/CVWO_23-24_Backend)
 
